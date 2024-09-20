@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgg4we5a1p667"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_io8jl"]
+[ext_resource type="Texture2D" uid="uid://dr40ocrxx7t6a" path="res://art/playerGrey_up1.png" id="2_7lesd"]
+[ext_resource type="Texture2D" uid="uid://6vh5jha8d05t" path="res://art/playerGrey_up2.png" id="3_j2hre"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7quxc"]
+radius = 86.0
+height = 202.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2v33v"]
+radius = 60.0083
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4i8y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7lesd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j2hre")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7lesd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j2hre")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t52v3"]
+radius = 1081.91
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5nvj4"]
+radius = 594.003
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(440, 300)
+script = ExtResource("1_io8jl")
+
+[node name="player_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_area"]
+shape = SubResource("CapsuleShape2D_7quxc")
+
+[node name="player_body" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_2v33v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i4i8y")
+animation = &"up"
+
+[node name="chase_radius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chase_radius"]
+shape = SubResource("CircleShape2D_t52v3")
+
+[node name="attack_radius" type="Area2D" parent="."]
+position = Vector2(-2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_radius"]
+shape = SubResource("CircleShape2D_5nvj4")
+
+[connection signal="body_entered" from="player_area" to="." method="_on_player_area_body_entered"]
+[connection signal="tree_entered" from="player_body" to="." method="_on_player_body_tree_entered"]
+[connection signal="area_entered" from="chase_radius" to="." method="_on_chase_radius_area_entered"]
+[connection signal="area_exited" from="chase_radius" to="." method="_on_chase_radius_area_exited"]
+[connection signal="body_entered" from="chase_radius" to="." method="_on_chase_radius_body_entered"]
+[connection signal="body_exited" from="chase_radius" to="." method="_on_chase_radius_body_exited"]
+[connection signal="body_entered" from="attack_radius" to="." method="_on_attack_radius_body_entered"]
+[connection signal="body_exited" from="attack_radius" to="." method="_on_attack_radius_body_exited"]

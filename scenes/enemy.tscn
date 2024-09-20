@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvliijes1nlld"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_3njf8"]
+[ext_resource type="Texture2D" uid="uid://xsx5serneoim" path="res://art/enemyFlyingAlt_1.png" id="1_hif65"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qm5jw"]
+radius = 32.0156
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tm8oi"]
+radius = 88.2327
+
+[node name="enemy" type="CharacterBody2D" groups=["Enemies"]]
+script = ExtResource("1_3njf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(17, 0)
+shape = SubResource("CircleShape2D_qm5jw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hif65")
+
+[node name="collider_radius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collider_radius"]
+shape = SubResource("CircleShape2D_tm8oi")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="RandomMovement" type="Timer" parent="."]
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 6.0
+
+[connection signal="area_entered" from="collider_radius" to="." method="_on_collider_radius_area_entered"]
+[connection signal="area_exited" from="collider_radius" to="." method="_on_collider_radius_area_exited"]
+[connection signal="timeout" from="RandomMovement" to="." method="_on_random_movement_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

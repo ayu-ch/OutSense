@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://connenny6ibsw"]
+
+[ext_resource type="PackedScene" uid="uid://dgg4we5a1p667" path="res://scenes/player.tscn" id="1_0b6ws"]
+[ext_resource type="Texture2D" uid="uid://byxsa4dfe6oys" path="res://icon.svg" id="1_rxodg"]
+[ext_resource type="PackedScene" uid="uid://dvliijes1nlld" path="res://scenes/enemy.tscn" id="3_1xp3f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k21ws"]
+size = Vector2(191.5, 128.5)
+
+[node name="World" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(770, 450)
+scale = Vector2(12.0391, 6.99219)
+texture = ExtResource("1_rxodg")
+
+[node name="Player" parent="." instance=ExtResource("1_0b6ws")]
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(270, 58)
+scale = Vector2(2, 2)
+
+[node name="enemy" parent="." instance=ExtResource("3_1xp3f")]
+position = Vector2(1049, 87)
+scale = Vector2(0.75, 0.75)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(927, 446)
+shape = SubResource("RectangleShape2D_k21ws")
+
+[node name="ColorRect" type="ColorRect" parent="RigidBody2D/CollisionShape2D"]
+offset_left = -34.0
+offset_top = -26.0
+offset_right = 59.0
+offset_bottom = 29.0
+metadata/_edit_use_anchors_ = true
