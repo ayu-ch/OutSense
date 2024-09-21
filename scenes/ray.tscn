@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://8xltgumg3x3"]
+
+[ext_resource type="Script" path="res://scripts/ray.gd" id="1_t833e"]
+[ext_resource type="Texture2D" uid="uid://wpsnne7hvwmc" path="res://assets/Objects/IBGP - Effects Starter Kit.png" id="1_ysv13"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_by1sh"]
+radius = 1.0
+height = 10.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_t833e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Ibgp-EffectsStarterKit" type="Sprite2D" parent="."]
+position = Vector2(4, 1.77636e-15)
+scale = Vector2(0.25885, 0.140625)
+texture = ExtResource("1_ysv13")
+region_enabled = true
+region_rect = Rect2(25.7487, 284.282, 113.61, 64.3077)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_by1sh")
