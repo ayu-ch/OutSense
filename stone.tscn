@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8nrkq4jaq3pb"]
+
+[ext_resource type="Script" path="res://stone.gd" id="1_scge3"]
+[ext_resource type="Texture2D" uid="uid://byxsa4dfe6oys" path="res://icon.svg" id="2_5bj47"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf7pp"]
+size = Vector2(41, 34)
+
+[node name="stone" type="RigidBody2D"]
+light_mask = 2
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_scge3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -2)
+scale = Vector2(0.382812, 0.304688)
+texture = ExtResource("2_5bj47")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-2, -2)
+shape = SubResource("RectangleShape2D_yf7pp")

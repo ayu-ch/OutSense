@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-#@onready var cooldown: Timer = $Cooldown
-#@onready var player_body: CollisionShape2D = $player_body
-const SPEED = 150
 
+var HEALTH = 100
+const SPEED = 150
 const JUMP_VELOCITY = -300.0
+
+@onready var healthbar: ColorRect = $ColorRect/healthbar
 
 enum {
 	SURROUND,
@@ -12,11 +13,14 @@ enum {
 	HIT,
 	RETREAT
 }
+var health_width
 
+func _ready() -> void:
+	health_width = healthbar.size.x
 
 func _physics_process(delta: float) -> void:
 	
-
+	healthbar.size.x = (HEALTH / 100.0) * health_width
 	var directionx := Input.get_axis("move_left", "move_right")
 	var directiony := Input.get_axis("move_up", "move_down")
 	if directionx:
@@ -34,12 +38,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		$AnimatedSprite2D.stop()
 	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = false
-		$AnimatedSprite2D.flip_h = velocity.x < 0
+		if velocity.x > 0:
+			$AnimatedSprite2D.animation = "right"
+		if velocity.x < 0:
+			$AnimatedSprite2D.animation = "left"
 	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = "up"
-		$AnimatedSprite2D.flip_v = velocity.y > 0
+		if velocity.y > 0:
+			$AnimatedSprite2D.animation = "down"
+		if velocity.y < 0:
+			$AnimatedSprite2D.animation = "up"
+			
 	move_and_slide()
 	
 
@@ -59,6 +67,7 @@ func _on_attack_radius_body_entered(body: Node2D) -> void:
 		body.is_in_attack_area=true
 		if body.CAN_ATTACK:
 			body.state=HIT
+			body.is_hitting = false
 			body.CAN_ATTACK=false
 			body.cooldown.start()
 		else:
@@ -80,12 +89,18 @@ func _on_chase_radius_body_exited(body: Node2D) -> void:
 		body.set_state(SURROUND)
 
 
-func _on_player_body_tree_entered() -> void:
-	print()
-	pass # Replace with function body.
 
 
 func _on_player_area_body_entered(body: Node2D) -> void:
+	take_damage(body)
+	
 	if body.is_in_group("Enemies"):
 		print(body)
 		body.set_state(RETREAT)
+		
+func take_damage(body):
+	if body.is_in_group("damage"):
+		HEALTH= HEALTH - 10
+		body.queue_free()
+		
+	

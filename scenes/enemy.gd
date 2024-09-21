@@ -2,12 +2,29 @@ extends CharacterBody2D
 
 const SPEED = 60
 const RANDOM_SPEED = 160
+const STONE_SPEED=50
 var motion=Vector2.ZERO
 var player= null
 var CAN_ATTACK=true
 var is_in_attack_area=false
 
-@onready var attack_radius: Area2D = $attack_radius
+var is_hitting= false
+
+#@onready var stone: Node2D = $"."
+var stone = preload("res://scenes/stone.tscn")
+
+@onready var ray_1: RayCast2D = $rays/ray1
+@onready var ray_2: RayCast2D = $rays/ray2
+@onready var ray_3: RayCast2D = $rays/ray3
+@onready var ray_4: RayCast2D = $rays/ray4
+
+
+@onready var ray_1_slant: RayCast2D = $rays_slant/ray1
+@onready var ray_2_slant: RayCast2D = $rays_slant/ray2
+@onready var ray_3_slant: RayCast2D = $rays_slant/ray3
+@onready var ray_4_slant: RayCast2D = $rays_slant/ray4
+
+
 @onready var enemy: CharacterBody2D = $"."
 @onready var Player: CharacterBody2D = $"../Player"
 @onready var attack_timer: Timer = $AttackTimer
@@ -37,28 +54,39 @@ func _ready():
   
 
 func _physics_process(delta):
+
+	$AnimatedSprite2D.play()
+	if abs(velocity.y) > abs(velocity.x):
+		if velocity.y > 0:
+			$AnimatedSprite2D.animation = "down"
+		if velocity.y < 0:
+			$AnimatedSprite2D.animation = "up"
+	else:
+		if velocity.x > 0:
+			$AnimatedSprite2D.animation = "right"
+		if velocity.x < 0:
+			$AnimatedSprite2D.animation = "left"
 	match state:
 		SURROUND:
 			move(get_circle_position(randomnum), delta)
 			print(SURROUND)
 		RANDOM:
+			print("IS IN" )
+			print(is_in_attack_area)
+			if is_in_attack_area:
+				state=HIT
 			print("RANDOM")
 			move_random(player.global_position, delta)
-			#vector_to_target = vector_to_target.rotated(randf_range(-amount,amount))
 
 		HIT:
-			#retreat(player.global_position,delta,1)
-			#await get_tree().create_timer(2).timeout
-			#retreat(player.global_position,delta,-1)
-			#await get_tree().create_timer(2).timeout
-			print("HIT") 
-			state=RANDOM
-			
-			
+			print("HIT")
+			move_random(player.global_position, delta)
+			if ! is_hitting:
+				hit()
+				is_hitting=true
+		
 		RETREAT:
 			retreat(player.global_position,delta,-1)
-			#await get_tree().create_timer(1).timeout
-			#state=RANDOM
 			print("RETREAT")
 
 func move_random(target, delta):
@@ -75,7 +103,7 @@ func move_random(target, delta):
 	
 func retreat(target,delta, sign):
 	var direction = sign * (target - global_position).normalized() 
-	var desired_velocity =  direction * SPEED
+	var desired_velocity =  direction * SPEED * 2
 	var steering = desired_velocity
 	velocity = steering
 	move_and_slide()
@@ -106,7 +134,33 @@ func get_circle_position(random):
 func _on_AttackTimer_timeout():
 	print("Timed out")
 
+
+func launch_stone(directions):
+	for i in range(len(directions)):
+		var new_stone=stone.instantiate()
+		add_child(new_stone)
+		new_stone.position = directions[i].target_position
+		var direction = (directions[i].target_position).normalized()
+		new_stone.apply_impulse(direction*180)
+
+func hit():
+	print("Hitting")
+	var directions=[]
+	directions.append(ray_1)
+	directions.append(ray_2)
+	directions.append(ray_3)
+	directions.append(ray_4)
+	launch_stone(directions)
 	
+	await get_tree().create_timer(3).timeout
+	
+	directions=[]
+	directions.append(ray_1_slant)
+	directions.append(ray_2_slant)
+	directions.append(ray_3_slant)
+	directions.append(ray_4_slant)
+	launch_stone(directions)
+
 
 
 func _on_random_movement_timeout() -> void:
@@ -117,6 +171,7 @@ func _on_random_movement_timeout() -> void:
 
 func _on_cooldown_timeout() -> void:
 	CAN_ATTACK=true
+	is_hitting=false
 	if is_in_attack_area:
 		state=HIT
 	
