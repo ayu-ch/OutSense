@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://3sdj01xgdyqv"]
+
+[ext_resource type="Texture2D" uid="uid://dxqk2lykm3vl2" path="res://icon.svg" id="1_fp501"]
+[ext_resource type="Script" path="res://Scripts/Ghost.gd" id="2_fi6vc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_twj3w"]
+light_mode = 1
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_eqxjp"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(0.509286, 0.509286, 0.509286, 1)
+show_behind_parent = true
+texture = ExtResource("1_fp501")
+script = ExtResource("2_fi6vc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.629194, 0.992159, 1)
+material = SubResource("CanvasItemMaterial_twj3w")
+position = Vector2(-1.90735e-06, -3.8147e-06)
+scale = Vector2(124, 124)
+texture = SubResource("CanvasTexture_eqxjp")
+script = ExtResource("2_fi6vc")

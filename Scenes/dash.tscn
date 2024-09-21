@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://co015o0id71x8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0r24d"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_lb3re"]
+colors = PackedColorArray(0.715026, 0.00101729, 0.813446, 1, 0.971665, 0.612892, 0.966954, 1)
+metadata/_snap_count = 11
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hd075"]
+gradient = SubResource("Gradient_lb3re")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3igt1"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_hd075")
+
+[sub_resource type="Gradient" id="Gradient_butug"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r5b84"]
+gradient = SubResource("Gradient_butug")
+width = 33
+height = 33
+fill_to = Vector2(0.0121951, 0)
+
+[node name="Dash" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_0r24d")
+scale = Vector2(0.258, 0.258)
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_3igt1")
+texture = SubResource("GradientTexture2D_r5b84")
+lifetime = 0.5
+fixed_fps = 60
