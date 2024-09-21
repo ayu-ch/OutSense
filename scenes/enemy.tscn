@@ -128,7 +128,21 @@ target_position = Vector2(-320, 320)
 [node name="ray4" type="RayCast2D" parent="rays_slant"]
 target_position = Vector2(-320, -320)
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -141.0
+offset_top = -388.0
+offset_right = 142.0
+offset_bottom = -364.0
+color = Color(1, 0, 0, 1)
+
+[node name="HealthBar_enemy" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 283.0
+offset_bottom = 24.0
+color = Color(0, 100, 0, 1)
+
 [connection signal="area_entered" from="collider_radius" to="." method="_on_collider_radius_area_entered"]
 [connection signal="area_exited" from="collider_radius" to="." method="_on_collider_radius_area_exited"]
+[connection signal="body_entered" from="collider_radius" to="." method="_on_collider_radius_body_entered"]
 [connection signal="timeout" from="RandomMovement" to="." method="_on_random_movement_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

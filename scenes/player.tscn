@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cj4j712kdr3ti" path="res://art/player1.png" id="3_1xumu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7quxc"]
-radius = 368.0
-height = 940.0
+radius = 277.0
+height = 674.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vx5gn"]
 atlas = ExtResource("2_6rnoi")
@@ -123,6 +123,7 @@ offset_bottom = 25.0
 color = Color(0, 1, 0, 1)
 
 [node name="player_shape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-4, 14)
 shape = SubResource("CapsuleShape2D_gy2h0")
 

@@ -30,11 +30,14 @@ var stone = preload("res://scenes/stone.tscn")
 @onready var attack_timer: Timer = $AttackTimer
 @onready var cooldown: Timer = $Cooldown
 @onready var random_movement_timer: Timer = $RandomMovement
+@onready var healthbar: ColorRect = $ColorRect/HealthBar_enemy
 
 var random_inward_outward = 0.0
 var random_tangential_speed = 0.0
 
 var randomnum
+var HEALTH = 100
+
 
 enum {
 	SURROUND,
@@ -44,6 +47,7 @@ enum {
 }
 
 var state = RANDOM
+var health_width
 
 func _ready():
 	var rng = RandomNumberGenerator.new()
@@ -51,21 +55,31 @@ func _ready():
 	randomnum = rng.randf()
 	player=Player
 	random_movement_timer.start()
+	health_width = healthbar.size.x
+	
+
   
 
 func _physics_process(delta):
+	healthbar.size.x = (HEALTH / 100.0) * health_width
 
 	$AnimatedSprite2D.play()
-	if abs(velocity.y) > abs(velocity.x):
-		if velocity.y > 0:
-			$AnimatedSprite2D.animation = "down"
-		if velocity.y < 0:
-			$AnimatedSprite2D.animation = "up"
+	if is_in_attack_area:
+	# If the enemy is in the attack radius, force the "down" animation
+		$AnimatedSprite2D.animation = "down"
 	else:
-		if velocity.x > 0:
-			$AnimatedSprite2D.animation = "right"
-		if velocity.x < 0:
-			$AnimatedSprite2D.animation = "left"
+	# Otherwise, move based on velocity
+		if abs(velocity.y) > abs(velocity.x):
+			if velocity.y > 0:
+				$AnimatedSprite2D.animation = "down"
+			elif velocity.y < 0:
+				$AnimatedSprite2D.animation = "up"	 
+		else:
+			if velocity.x > 0:
+				$AnimatedSprite2D.animation = "right"
+			elif velocity.x < 0:
+				$AnimatedSprite2D.animation = "left"
+				
 	match state:
 		SURROUND:
 			move(get_circle_position(randomnum), delta)
@@ -175,3 +189,7 @@ func _on_cooldown_timeout() -> void:
 	if is_in_attack_area:
 		state=HIT
 	
+func _on_collider_radius_body_entered(body: Node2D) -> void:
+	if body.is_in_group("damage"):
+		HEALTH= HEALTH - body.damage
+		body.queue_free()

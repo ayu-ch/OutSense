@@ -100,7 +100,7 @@ func _on_player_area_body_entered(body: Node2D) -> void:
 		
 func take_damage(body):
 	if body.is_in_group("damage"):
-		HEALTH= HEALTH - 10
+		HEALTH= HEALTH - body.damage
 		body.queue_free()
 		
 	
