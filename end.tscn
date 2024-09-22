@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cphlyab01rf4s"]
+
+[ext_resource type="VideoStream" path="res://assets/end.ogv" id="1_g5car"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -820.0
+offset_top = -534.0
+offset_right = 833.0
+offset_bottom = 597.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -579.0
+offset_top = -323.0
+offset_right = 577.0
+offset_bottom = 320.0
+stream = ExtResource("1_g5car")
+autoplay = true
+expand = true
