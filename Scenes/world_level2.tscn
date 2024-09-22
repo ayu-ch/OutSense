@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcj787xp3so2p"]
+
+[ext_resource type="Script" path="res://Scripts/world_level_2.gd" id="1_uxbou"]
+[ext_resource type="Texture2D" uid="uid://behnjemuf4hih" path="res://icon.svg" id="1_w7atp"]
+[ext_resource type="PackedScene" uid="uid://h8tn2i865e8i" path="res://Scenes/player_level2.tscn" id="2_5xxyn"]
+[ext_resource type="PackedScene" uid="uid://dp5itgrgtpbsv" path="res://Scenes/enemy_level2.tscn" id="3_rcym4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k21ws"]
+size = Vector2(191.5, 128.5)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_uxbou")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(770, 450)
+scale = Vector2(12.0391, 6.99219)
+texture = ExtResource("1_w7atp")
+
+[node name="Player" parent="." instance=ExtResource("2_5xxyn")]
+position = Vector2(476, 344)
+scale = Vector2(0.4, 0.4)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-170, -242)
+scale = Vector2(2, 2)
+
+[node name="RayCast2D" type="RayCast2D" parent="Player"]
+
+[node name="enemy" parent="." instance=ExtResource("3_rcym4")]
+position = Vector2(1200, 0)
+scale = Vector2(0.403165, 0.4)
+
+[node name="rigid" type="RigidBody2D" parent="."]
+visible = false
+light_mask = 2
+visibility_layer = 2
+z_index = 1
+position = Vector2(114, 311)
+collision_layer = 2
+collision_mask = 2
+collision_priority = 2.0
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rigid"]
+light_mask = 2
+visibility_layer = 2
+z_index = 1
+position = Vector2(1019, -267)
+shape = SubResource("RectangleShape2D_k21ws")
+
+[node name="ColorRect" type="ColorRect" parent="rigid/CollisionShape2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -27.5
+offset_right = 46.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="grenade_cooldown" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="grenade_cooldown" to="." method="_on_grenade_cooldown_timeout"]

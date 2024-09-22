@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvmjuqrb413t7"]
+
+[ext_resource type="Script" path="res://Scripts/stone.gd" id="1_iw4o7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5v6x"]
+
+[node name="stone" type="RigidBody2D" groups=["damage"]]
+gravity_scale = 0.0
+script = ExtResource("1_iw4o7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t5v6x")
+
+[node name="ColorRect" type="ColorRect" parent="CollisionShape2D" groups=["damage"]]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="damage" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="damage" to="." method="_on_damage_timeout"]

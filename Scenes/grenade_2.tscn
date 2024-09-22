@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b28hpi8nbt06j"]
+
+[ext_resource type="Texture2D" uid="uid://jk2e1ipkc6kp" path="res://Assets/grenade.png" id="1_fklnn"]
+[ext_resource type="Script" path="res://Scripts/grenade.gd" id="1_m1epl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_df4lf"]
+radius = 179.161
+
+[node name="Area2D" type="Area2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_m1epl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CircleShape2D_df4lf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, 3.00001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_fklnn")
+region_enabled = true
+region_rect = Rect2(385, 125, 376, 393)

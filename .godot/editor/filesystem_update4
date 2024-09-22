@@ -1,0 +1,8 @@
+res://Scenes/world_level2.tscn
+res://Scenes/enemy_level2.tscn
+res://Scenes/player_level2.tscn
+res://Scenes/stone.tscn
+res://Scenes/grenade_2.tscn
+res://Scenes/ray.tscn
+res://Scripts/enemy.gd
+res://Scripts/player.gd
