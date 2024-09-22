@@ -1,30 +1,40 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1726992367
-icon.svg::CompressedTexture2D::2682432325122349035::1726936329::1726936573::1::::<><>::
-README.md::TextFile::-1::1726936210::0::1::::<><>::
-::res://Assets/::1726948887
-enemy1_.png::CompressedTexture2D::4391777500547791629::1726937797::1726937800::1::::<><>::
-gameover.wav::AudioStreamWAV::8299257154537229882::1726937797::1726937800::1::::<><>::
-grenade-02.svg::CompressedTexture2D::7633833185172511099::1726937797::1726937797::1::::<><>::
-grenade.png::CompressedTexture2D::653991250923751919::1726937797::1726937798::1::::<><>::
-House In a Forest Loop.ogg::AudioStreamOggVorbis::6047172421459164163::1726937797::1726937797::1::::<><>::
-IBGP - Weapons Starter Kit.png::CompressedTexture2D::5569038064711056303::1726948878::1726948887::1::::<><>::
-main-char-sprites-all (1).png::CompressedTexture2D::486083326037058112::1726937797::1726937799::1::::<><>::
-main-char-sprites-all (1).svg::CompressedTexture2D::1387213522053701137::1726937797::1726937798::1::::<><>::
-main-char-sprites-all (2).png::CompressedTexture2D::3587073322346766543::1726937797::1726937799::1::::<><>::
-main-char-sprites-all.png::CompressedTexture2D::2534983672948246725::1726937797::1726937799::1::::<><>::
-player1.png::CompressedTexture2D::5465012921111969334::1726937797::1726937799::1::::<><>::
-::res://Scenes/::1726992338
-enemy_level2.tscn::PackedScene::8274546045998277157::1726992338::0::1::::<><>::res://Scripts/enemy.gd<>uid://b3tn60ptt4h62::::res://Assets/enemy1_.png
-grenade_2.tscn::PackedScene::4350096205420007187::1726992338::0::1::::<><>::uid://jk2e1ipkc6kp::::res://Assets/grenade.png<>res://Scripts/grenade.gd
-player_level2.tscn::PackedScene::560624641564395258::1726992338::0::1::::<><>::res://Scripts/player.gd<>uid://brdutrapuffox::::res://Assets/main-char-sprites-all (2).png<>uid://cj4j712kdr3ti::::res://Assets/player1.png
-ray.tscn::PackedScene::69541608588047882::1726992338::0::1::::<><>::res://scripts/ray.gd<>uid://cllxijh3xgxk6::::res://Assets/IBGP - Weapons Starter Kit.png
-stone.tscn::PackedScene::3885741968674016022::1726992338::0::1::::<><>::res://Scripts/stone.gd
-world_level2.tscn::PackedScene::2547381362720471757::1726992338::0::1::::<><>::res://Scripts/world_level_2.gd<>uid://behnjemuf4hih::::res://icon.svg<>uid://h8tn2i865e8i::::res://Scenes/player_level2.tscn<>uid://dp5itgrgtpbsv::::res://Scenes/enemy_level2.tscn
-::res://Scripts/::1726992334
-enemy.gd::GDScript::-1::1726992334::0::1::::<>CharacterBody2D<>::
-grenade.gd::GDScript::-1::1726987887::0::1::::<>Area2D<>::
-player.gd::GDScript::-1::1726992016::0::1::::<>CharacterBody2D<>::
-ray.gd::GDScript::-1::1726956232::0::1::::<>RigidBody2D<>::
-stone.gd::GDScript::-1::1726937848::0::1::::<>RigidBody2D<>::
-world_level_2.gd::GDScript::-1::1726988343::0::1::::<>Node2D<>::
+::res://::1726994979
+icon.svg::CompressedTexture2D::2682432325122349035::1726994925::1726994925::1::::<><>::
+README.md::TextFile::-1::1726994925::0::1::::<><>::
+::res://Assets/::1727000194
+enemy1_.png::CompressedTexture2D::4391777500547791629::1726994925::1726994925::1::::<><>::
+gameover.wav::AudioStreamWAV::8299257154537229882::1726994925::1726994925::1::::<><>::
+grenade-02.svg::CompressedTexture2D::7633833185172511099::1726994925::1726994925::1::::<><>::
+grenade.png::CompressedTexture2D::653991250923751919::1726994925::1726994925::1::::<><>::
+House In a Forest Loop.ogg::AudioStreamOggVorbis::6047172421459164163::1726994925::1726994925::1::::<><>::
+IBGP - Weapons Starter Kit.png::CompressedTexture2D::5569038064711056303::1726994925::1726994925::1::::<><>::
+light.png::CompressedTexture2D::5923873015168578170::1726841770::1726995120::1::::<><>::
+main-char-sprites-all (1).png::CompressedTexture2D::486083326037058112::1726994925::1726994925::1::::<><>::
+main-char-sprites-all (1).svg::CompressedTexture2D::1387213522053701137::1726994925::1726994925::1::::<><>::
+main-char-sprites-all (2).png::CompressedTexture2D::3587073322346766543::1726994925::1726994925::1::::<><>::
+main-char-sprites-all.png::CompressedTexture2D::2534983672948246725::1726994925::1726994925::1::::<><>::
+player1.png::CompressedTexture2D::5465012921111969334::1727000191::1727000194::1::::<><>::
+player1_back.png::CompressedTexture2D::3326142187823604334::1727000179::1727000194::1::::<><>::
+player1_front.png::CompressedTexture2D::261003880963993331::1727000502::1727000512::1::::<><>::
+player1_left.png::CompressedTexture2D::6521344038885216369::1727000435::1727000512::1::::<><>::
+player1_right.png::CompressedTexture2D::8474740406428757570::1727000457::1727000512::1::::<><>::
+::res://Scenes/::1727000371
+dash_back.tscn::PackedScene::8817282853414877632::1727000371::0::1::::<><>::uid://bnnhctykrcscc::::res://Assets/player1_back.png<>res://Scenes/Dash_Back.gd
+dash_front.tscn::PackedScene::8587925665783595390::1727000089::0::1::::<><>::uid://dyoxwlglbnd8::::res://Assets/player1_front.png
+dash_left.tscn::PackedScene::938173429329821849::1727000089::0::1::::<><>::uid://cy58t3tpyg1fp::::res://Assets/player1_left.png
+dash_right.tscn::PackedScene::1235086994908323368::1727000089::0::1::::<><>::uid://ds0h0bgjlpede::::res://Assets/player1_right.png
+enemy_level2.tscn::PackedScene::8274546045998277157::1727000088::0::1::::<><>::res://Scripts/enemy.gd<>uid://b3tn60ptt4h62::::res://Assets/enemy1_.png
+grenade_2.tscn::PackedScene::4350096205420007187::1727000089::0::1::::<><>::uid://jk2e1ipkc6kp::::res://Assets/grenade.png<>res://Scripts/grenade.gd
+player_level2.tscn::PackedScene::560624641564395258::1727000089::0::1::::<><>::res://Scripts/player.gd<>uid://brdutrapuffox::::res://Assets/main-char-sprites-all (2).png<>uid://nmptxxj03jqf::::res://Scenes/dash_left.tscn<>uid://cj4j712kdr3ti::::res://Assets/player1.png<>uid://rujx46p3vbeu::::res://Scenes/dash_right.tscn<>uid://dxvfmiufstnye::::res://Scenes/dash_back.tscn<>uid://dumb47o8d2lms::::res://Scenes/dash_front.tscn
+ray.tscn::PackedScene::69541608588047882::1727000089::0::1::::<><>::res://scripts/ray.gd<>uid://cllxijh3xgxk6::::res://Assets/IBGP - Weapons Starter Kit.png
+Dash_Back.gd::GDScript::-1::1726997342::0::1::::<>GPUParticles2D<>::
+stone.tscn::PackedScene::3885741968674016022::1727000089::0::1::::<><>::res://Scripts/stone.gd
+world_level2.tscn::PackedScene::2547381362720471757::1727000088::0::1::::<><>::res://Scripts/world_level_2.gd<>uid://behnjemuf4hih::::res://icon.svg<>uid://h8tn2i865e8i::::res://Scenes/player_level2.tscn<>uid://dp5itgrgtpbsv::::res://Scenes/enemy_level2.tscn<>uid://cqntk8p8ute23::::res://Assets/light.png
+::res://Scripts/::1727000054
+enemy.gd::GDScript::-1::1726994925::0::1::::<>CharacterBody2D<>::
+grenade.gd::GDScript::-1::1726994925::0::1::::<>Area2D<>::
+player.gd::GDScript::-1::1727000054::0::1::::<>CharacterBody2D<>::
+ray.gd::GDScript::-1::1726994925::0::1::::<>RigidBody2D<>::
+stone.gd::GDScript::-1::1726994925::0::1::::<>RigidBody2D<>::
+world_level_2.gd::GDScript::-1::1726994925::0::1::::<>Node2D<>::

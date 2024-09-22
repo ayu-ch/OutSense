@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://nmptxxj03jqf"]
+
+[ext_resource type="Texture2D" uid="uid://cy58t3tpyg1fp" path="res://Assets/player1_left.png" id="1_acpga"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nob06"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_ry8fy"]
+offsets = PackedFloat32Array(0, 0.901639)
+colors = PackedColorArray(0.663527, 0.117845, 0.672408, 1, 0.917519, 0.771881, 0.990543, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r1dpm"]
+gradient = SubResource("Gradient_ry8fy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pfav8"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.4
+color_ramp = SubResource("GradientTexture1D_r1dpm")
+
+[node name="Dash_Left" type="GPUParticles2D"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_nob06")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_pfav8")
+texture = ExtResource("1_acpga")
+lifetime = 0.5

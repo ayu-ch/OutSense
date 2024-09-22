@@ -1,7 +1,6 @@
 extends Node2D
 @onready var enemy: CharacterBody2D = $enemy
 
-
 var can_grenade = true
 var grenade_scene = preload("res://Scenes/grenade_2.tscn")
 var Click_Position = Vector2(0,0)

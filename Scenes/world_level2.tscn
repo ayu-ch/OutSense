@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcj787xp3so2p"]
+[gd_scene load_steps=8 format=3 uid="uid://bcj787xp3so2p"]
 
 [ext_resource type="Script" path="res://Scripts/world_level_2.gd" id="1_uxbou"]
 [ext_resource type="Texture2D" uid="uid://behnjemuf4hih" path="res://icon.svg" id="1_w7atp"]
 [ext_resource type="PackedScene" uid="uid://h8tn2i865e8i" path="res://Scenes/player_level2.tscn" id="2_5xxyn"]
 [ext_resource type="PackedScene" uid="uid://dp5itgrgtpbsv" path="res://Scenes/enemy_level2.tscn" id="3_rcym4"]
+[ext_resource type="Texture2D" uid="uid://cqntk8p8ute23" path="res://Assets/light.png" id="4_rxn2x"]
+[ext_resource type="Script" path="res://Scripts/Spotlight.gd" id="5_sugi6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k21ws"]
 size = Vector2(191.5, 128.5)
@@ -25,6 +27,24 @@ position = Vector2(-170, -242)
 scale = Vector2(2, 2)
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+energy = 0.9
+shadow_enabled = true
+texture = ExtResource("4_rxn2x")
+texture_scale = 4.33
+script = ExtResource("5_sugi6")
+
+[node name="Spotlight_cooldown" type="Timer" parent="Player/PointLight2D"]
+wait_time = 10.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Player"]
+energy = 0.4
+texture = ExtResource("4_rxn2x")
+texture_scale = 8.14
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Player"]
+color = Color(0.0383972, 0.0383972, 0.0383972, 1)
 
 [node name="enemy" parent="." instance=ExtResource("3_rcym4")]
 position = Vector2(1200, 0)
@@ -65,4 +85,5 @@ metadata/_edit_use_anchors_ = true
 [node name="grenade_cooldown" type="Timer" parent="."]
 wait_time = 5.0
 
+[connection signal="timeout" from="Player/PointLight2D/Spotlight_cooldown" to="Player/PointLight2D" method="_on_spotlight_cooldown_timeout"]
 [connection signal="timeout" from="grenade_cooldown" to="." method="_on_grenade_cooldown_timeout"]

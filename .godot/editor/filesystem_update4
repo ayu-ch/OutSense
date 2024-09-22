@@ -4,5 +4,10 @@ res://Scenes/player_level2.tscn
 res://Scenes/stone.tscn
 res://Scenes/grenade_2.tscn
 res://Scenes/ray.tscn
-res://Scripts/enemy.gd
+res://Scenes/dash_left.tscn
 res://Scripts/player.gd
+res://Scenes/dash_right.tscn
+res://Scenes/dash_front.tscn
+res://Scenes/dash_back.tscn
+res://Scripts/Spotlight.gd
+res://Scripts/world_level_2.gd
