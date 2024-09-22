@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcj787xp3so2p"]
+[gd_scene load_steps=7 format=3 uid="uid://bcj787xp3so2p"]
 
 [ext_resource type="Script" path="res://Scripts/world_level_2.gd" id="1_uxbou"]
 [ext_resource type="Texture2D" uid="uid://behnjemuf4hih" path="res://icon.svg" id="1_w7atp"]
 [ext_resource type="PackedScene" uid="uid://h8tn2i865e8i" path="res://Scenes/player_level2.tscn" id="2_5xxyn"]
 [ext_resource type="PackedScene" uid="uid://dp5itgrgtpbsv" path="res://Scenes/enemy_level2.tscn" id="3_rcym4"]
+[ext_resource type="Script" path="res://Scripts/canvas.gd" id="5_j78h2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k21ws"]
 size = Vector2(191.5, 128.5)
@@ -65,4 +66,19 @@ metadata/_edit_use_anchors_ = true
 [node name="grenade_cooldown" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_j78h2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 33.0
+offset_top = 22.0
+offset_right = 571.0
+offset_bottom = 202.0
+text = "Grenade available"
+
+[node name="grenade_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="timeout" from="grenade_cooldown" to="." method="_on_grenade_cooldown_timeout"]
+[connection signal="timeout" from="grenade_timer" to="." method="_on_grenade_timer_timeout"]

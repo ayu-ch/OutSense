@@ -97,3 +97,9 @@ func get_final_position(player_pos: Vector2, click_pos: Vector2, max_radius: flo
 
 func _on_grenade_cooldown_timeout() -> void:
 	can_grenade=true
+
+@onready var grenade_timer: Timer = $grenade_timer
+@onready var rich_text_label: RichTextLabel = $CanvasLayer/RichTextLabel
+
+func _on_grenade_timer_timeout() -> void:
+	rich_text_label.text = "Grenade available"

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbhsdq75cnd4d"]
+
+[ext_resource type="Script" path="res://Scripts/video_stream_player.gd" id="1_1iplt"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_8bphh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = SubResource("VideoStreamTheora_8bphh")
+script = ExtResource("1_1iplt")
+
+[node name="pause" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
