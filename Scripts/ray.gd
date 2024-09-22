@@ -3,7 +3,7 @@ extends RigidBody2D
 var damage=10
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await get_tree().create_timer(0.75).timeout
+	await get_tree().create_timer(3).timeout
 	queue_free()
 	 # Replace with function body.
 

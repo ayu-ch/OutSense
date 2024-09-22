@@ -9,8 +9,8 @@ height = 10.0
 
 [node name="RigidBody2D" type="RigidBody2D" groups=["damage_enemy", "demege_enamy"]]
 scale = Vector2(0.973611, 1.04)
-collision_layer = 8
-collision_mask = 8
+collision_layer = 24
+collision_mask = 24
 gravity_scale = 0.0
 script = ExtResource("1_t833e")
 

@@ -1,0 +1,146 @@
+[gd_scene load_steps=18 format=3 uid="uid://dtc4r4mabjaoa"]
+
+[ext_resource type="Script" path="res://Scripts/player_level1.gd" id="1_55kaq"]
+[ext_resource type="Texture2D" uid="uid://brdutrapuffox" path="res://Assets/main-char-sprites-all (2).png" id="2_6rnoi"]
+[ext_resource type="Texture2D" uid="uid://cj4j712kdr3ti" path="res://Assets/player1.png" id="3_1xumu"]
+[ext_resource type="PackedScene" uid="uid://dxvfmiufstnye" path="res://Scenes/dash_back.tscn" id="4_85eoj"]
+[ext_resource type="PackedScene" uid="uid://dumb47o8d2lms" path="res://Scenes/dash_front.tscn" id="5_svf58"]
+[ext_resource type="PackedScene" uid="uid://nmptxxj03jqf" path="res://Scenes/dash_left.tscn" id="6_73vqq"]
+[ext_resource type="PackedScene" uid="uid://rujx46p3vbeu" path="res://Scenes/dash_right.tscn" id="7_y8u7r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7quxc"]
+radius = 277.0
+height = 674.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx5gn"]
+atlas = ExtResource("2_6rnoi")
+region = Rect2(0, 0, 1178, 654)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7xeg"]
+atlas = ExtResource("2_6rnoi")
+region = Rect2(0, 654, 1178, 654)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37jbd"]
+atlas = ExtResource("3_1xumu")
+region = Rect2(0, 3220, 1083, 805)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgf67"]
+atlas = ExtResource("3_1xumu")
+region = Rect2(0, 4025, 1083, 805)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1rw0"]
+atlas = ExtResource("2_6rnoi")
+region = Rect2(0, 1308, 1178, 654)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aixtq"]
+atlas = ExtResource("2_6rnoi")
+region = Rect2(0, 1962, 1178, 654)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4i8y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vx5gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7xeg")
+}],
+"loop": true,
+"name": &"down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37jbd")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgf67")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1rw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aixtq")
+}],
+"loop": true,
+"name": &"up",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5nvj4"]
+radius = 3441.46
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gy2h0"]
+radius = 177.0
+height = 562.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_55kaq")
+
+[node name="player_area" type="Area2D" parent="."]
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_area"]
+shape = SubResource("CapsuleShape2D_7quxc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i4i8y")
+animation = &"up"
+frame_progress = 0.95797
+
+[node name="attack_radius" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_radius"]
+position = Vector2(3, 25)
+shape = SubResource("CircleShape2D_5nvj4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -139.0
+offset_top = -300.0
+offset_right = 144.0
+offset_bottom = -276.0
+color = Color(0.906952, 0.290503, 0.194336, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="healthbar" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 283.0
+offset_bottom = 24.0
+color = Color(0, 1, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="player_shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_gy2h0")
+
+[node name="Dash_Back" parent="." instance=ExtResource("4_85eoj")]
+script = null
+
+[node name="Dash_Front" parent="." instance=ExtResource("5_svf58")]
+
+[node name="Dash_Left" parent="." instance=ExtResource("6_73vqq")]
+
+[node name="Dash_Right" parent="." instance=ExtResource("7_y8u7r")]
+
+[node name="Dash_Cooldown" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="body_entered" from="player_area" to="." method="_on_player_area_body_entered"]
+[connection signal="body_entered" from="attack_radius" to="." method="_on_attack_radius_body_entered"]
+[connection signal="body_exited" from="attack_radius" to="." method="_on_attack_radius_body_exited"]
+[connection signal="tree_entered" from="player_shape" to="." method="_on_player_body_tree_entered"]
+[connection signal="timeout" from="Dash_Cooldown" to="." method="_on_dash_cooldown_timeout"]

@@ -1,0 +1,138 @@
+[gd_scene load_steps=13 format=3 uid="uid://ccs0kxumh2jm7"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_level1.gd" id="1_33pv3"]
+[ext_resource type="Texture2D" uid="uid://b3tn60ptt4h62" path="res://Assets/enemy1_.png" id="2_0ofgk"]
+[ext_resource type="AudioStream" uid="uid://civrys8v00ck2" path="res://Assets/Audio/enemy_growling.mp3" id="3_ghprp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3o2r"]
+radius = 348.0
+height = 948.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0om4p"]
+radius = 373.0
+height = 1002.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kev2l"]
+atlas = ExtResource("2_0ofgk")
+region = Rect2(0, 0, 1083, 861)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gab7"]
+atlas = ExtResource("2_0ofgk")
+region = Rect2(0, 861, 1083, 861)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v17kc"]
+atlas = ExtResource("2_0ofgk")
+region = Rect2(0, 2583, 1083, 861)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbicv"]
+atlas = ExtResource("2_0ofgk")
+region = Rect2(0, 1722, 1083, 861)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cdic"]
+atlas = ExtResource("2_0ofgk")
+region = Rect2(0, 3444, 1083, 861)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3o3a"]
+atlas = ExtResource("2_0ofgk")
+region = Rect2(0, 4305, 1083, 861)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i3ndp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kev2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gab7")
+}],
+"loop": true,
+"name": &"down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v17kc")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbicv")
+}],
+"loop": true,
+"name": &"right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5cdic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3o3a")
+}],
+"loop": true,
+"name": &"up",
+"speed": 2.0
+}]
+
+[node name="enemy" type="CharacterBody2D" groups=["Enemies"]]
+light_mask = 3
+visibility_layer = 3
+z_index = 1
+collision_layer = 3
+collision_mask = 6
+collision_priority = 2.0
+script = ExtResource("1_33pv3")
+
+[node name="collider_radius" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 6
+collision_priority = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collider_radius"]
+light_mask = 3
+visibility_layer = 3
+shape = SubResource("CapsuleShape2D_x3o2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+shape = SubResource("CapsuleShape2D_0om4p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i3ndp")
+animation = &"down"
+frame_progress = 0.483019
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="RandomMovement" type="Timer" parent="."]
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -141.0
+offset_top = -388.0
+offset_right = 142.0
+offset_bottom = -364.0
+color = Color(1, 0, 0, 1)
+
+[node name="HealthBar_enemy" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 283.0
+offset_bottom = 24.0
+color = Color(0, 100, 0, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ghprp")
+
+[connection signal="area_entered" from="collider_radius" to="." method="_on_collider_radius_area_entered"]
+[connection signal="area_exited" from="collider_radius" to="." method="_on_collider_radius_area_exited"]
+[connection signal="body_entered" from="collider_radius" to="." method="_on_collider_radius_body_entered"]
+[connection signal="timeout" from="RandomMovement" to="." method="_on_random_movement_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

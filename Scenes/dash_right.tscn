@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://rujx46p3vbeu"]
+
+[ext_resource type="Texture2D" uid="uid://ccpxbhuledvh" path="res://Assets/player1_right.png" id="1_fxbx5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fk3ic"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_ry8fy"]
+offsets = PackedFloat32Array(0, 0.508197)
+colors = PackedColorArray(0.663527, 0.117845, 0.672408, 1, 0.942353, 0.768216, 0.98369, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r1dpm"]
+gradient = SubResource("Gradient_ry8fy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pfav8"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+color_ramp = SubResource("GradientTexture1D_r1dpm")
+
+[node name="Dash_Right" type="GPUParticles2D"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_fk3ic")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_pfav8")
+texture = ExtResource("1_fxbx5")
+lifetime = 0.5

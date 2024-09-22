@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://djmtjwo8l48k5"
+path="res://.godot/imported/backgorund audio.mp3-ee02d61f68a2cbf3d7731cd2aabcf3ed.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/backgorund audio.mp3"
+dest_files=["res://.godot/imported/backgorund audio.mp3-ee02d61f68a2cbf3d7731cd2aabcf3ed.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

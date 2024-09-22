@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://h8tn2i865e8i"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_saw7y"]
+[ext_resource type="Script" path="res://Scripts/player_level2.gd" id="1_h2444"]
 [ext_resource type="Texture2D" uid="uid://brdutrapuffox" path="res://Assets/main-char-sprites-all (2).png" id="2_6rnoi"]
 [ext_resource type="Texture2D" uid="uid://cj4j712kdr3ti" path="res://Assets/player1.png" id="3_1xumu"]
 
@@ -81,7 +81,7 @@ radius = 177.0
 height = 562.0
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_saw7y")
+script = ExtResource("1_h2444")
 
 [node name="player_area" type="Area2D" parent="."]
 
